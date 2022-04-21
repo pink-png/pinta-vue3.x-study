@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useMainStore } from "../store/index";
+import { useMainStore } from "@/store/index";
 import { storeToRefs } from "pinia";
 export default defineComponent({
   name: "HelloWorld",
