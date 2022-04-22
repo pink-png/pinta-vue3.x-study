@@ -1,5 +1,5 @@
 <template>
-  <div class="container-tabbar">
+  <div class="container-tabbar" v-if="isshow">
     <div class="flexbox">
       <div
         v-for="(item, index) in navlinklist"
@@ -8,7 +8,7 @@
         @click="jump(item)"
       >
         <img v-if="isactive === item.id" :src="item.imgpathnoselected" />
-        <img v-else :src="item.imgpathselected" /> 
+        <img v-else :src="item.imgpathselected" />
         <div>{{ item.name }}</div>
       </div>
     </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useMainStore } from "@/store/index";
 import { storeToRefs } from "pinia";
@@ -25,8 +25,22 @@ export default defineComponent({
   setup(props, context) {
     const router = useRouter();
     const route = useRoute();
-    console.log(route);
-    
+    let isshow = ref<boolean>(true);
+    watch(
+      () => route.name,
+      (newPath, oldPath) => {
+        console.log("newPath", newPath);
+        if (["首页", "客服问题", "我的"].includes(newPath as string)) {
+          isshow.value = true
+        }else{
+          isshow.value = false
+        }
+      },
+      {
+        deep: true,
+      }
+    );
+
     type navlink = {
       id: number;
       name: string;
@@ -40,22 +54,22 @@ export default defineComponent({
         id: 0,
         name: "首页",
         link: "/",
-        imgpathselected : require('@/assets/img/tabbar/index.png'),
-        imgpathnoselected : require('@/assets/img/tabbar/index_selected.png'),
+        imgpathselected: require("@/assets/img/tabbar/index.png"),
+        imgpathnoselected: require("@/assets/img/tabbar/index_selected.png"),
       },
       {
         id: 1,
         name: "客服问题",
         link: "/customer",
-        imgpathselected: require('@/assets/img/tabbar/customer.png'),
-        imgpathnoselected: require('@/assets/img/tabbar/customer_selected.png'),
+        imgpathselected: require("@/assets/img/tabbar/customer.png"),
+        imgpathnoselected: require("@/assets/img/tabbar/customer_selected.png"),
       },
       {
         id: 2,
         name: "我的",
         link: "/my",
-        imgpathselected: require('@/assets/img/tabbar/my.png'),
-        imgpathnoselected:  require('@/assets/img/tabbar/my_selected.png'),
+        imgpathselected: require("@/assets/img/tabbar/my.png"),
+        imgpathnoselected: require("@/assets/img/tabbar/my_selected.png"),
       },
     ];
 
@@ -68,6 +82,7 @@ export default defineComponent({
     return {
       navlinklist,
       isactive,
+      isshow,
       jump,
     };
   },
@@ -95,7 +110,7 @@ export default defineComponent({
   align-items: center;
 }
 
-.flexbox > div  {
+.flexbox > div {
   flex: 1;
   display: flex;
   height: 100%;
@@ -103,17 +118,17 @@ export default defineComponent({
   align-items: center;
 }
 
-.flexbox > div > img  {
-   width: 30px;
-   height: 30px;
-   margin-top: 10px;
+.flexbox > div > img {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
 }
-.flexbox > div > div  {
-    margin-top: 20px;
+.flexbox > div > div {
+  margin-top: 20px;
 }
 
 .selectedlink {
-  color: #F86767;
+  color: #f86767;
 }
 
 .noseletdelink {

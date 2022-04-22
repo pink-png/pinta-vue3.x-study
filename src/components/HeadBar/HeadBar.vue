@@ -1,5 +1,6 @@
 <template>
   <div class="container-headbar">
+    <div class="fanhui" v-if="isfanhui" @click="btnfanhui">返回</div>
     {{ titlename }}
   </div>
 </template>
@@ -16,12 +17,22 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
     let titlename = ref<string>("首页");
+    let isfanhui = ref<boolean>(false);
 
+    const btnfanhui = () =>{
+      router.back()
+      // router.go(-1)
+    }
     watch(
       () => route.name,
       (newPath, oldPath) => {
         console.log("newPath", newPath);
         titlename.value = newPath as string;
+         if (["首页", "客服问题", "我的"].includes(newPath as string)) {
+          isfanhui.value = false
+        }else{
+          isfanhui.value = true
+        }
       },
       {
         deep: true,
@@ -30,12 +41,14 @@ export default defineComponent({
 
     return {
       titlename,
+      isfanhui,
+      btnfanhui
     };
   },
 });
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 .container-headbar {
   position: fixed;
   top: 0;
@@ -45,7 +58,16 @@ export default defineComponent({
   height: 40px;
   text-align: center;
   line-height: 40px;
-  background: #ffffff;
+  background: #F86767;
   border-bottom: 1px solid #cccccc;
+  font-weight: 800;
+  font-size: 20px;
+  color: #ffffff;
+
+  .fanhui{
+    position: absolute;
+    top: 0;
+    left: 30px;  
+  }
 }
 </style>

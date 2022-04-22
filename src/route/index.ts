@@ -19,6 +19,11 @@ const routes: Array<RouteRecordRaw> = [
         name: '我的',
         path: '/my',
         component: () => import('@/pages/my/my.vue')
+    },
+    {
+        name: '模板分类',
+        path: '/classify',
+        component: () => import('@/pages/classify/classify.vue')
     }
 
 ]

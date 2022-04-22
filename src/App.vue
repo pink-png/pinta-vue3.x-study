@@ -56,7 +56,7 @@ export default defineComponent({
 /* 进入的起点、离开的终点 */
 .hello-enter,
 .hello-leave-to {
-  transform: translateX(100%);
+  transform: translateX(-100%);
 }
 .hello-enter-active,
 .hello-leave-active {
