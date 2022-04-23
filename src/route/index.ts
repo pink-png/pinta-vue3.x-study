@@ -24,7 +24,13 @@ const routes: Array<RouteRecordRaw> = [
         name: '模板分类',
         path: '/classify',
         component: () => import('@/pages/classify/classify.vue')
+    },
+    {
+        name: '填写登报内容',
+        path: '/paperContent',
+        component: () => import('@/pages/paperContent/paperContent.vue')
     }
+
 
 ]
 const router = createRouter({

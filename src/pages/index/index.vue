@@ -97,7 +97,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
   .head {
     width: 375px;
     height: 50px;
@@ -145,6 +144,7 @@ export default defineComponent({
   }
 
   .listbox {
+    margin-top: -40px;
     width: 100%;
     box-sizing: border-box;
     padding: 0 10px;

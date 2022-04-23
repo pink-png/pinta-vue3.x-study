@@ -14,7 +14,12 @@
 
     <!-- 列表 -->
     <div class="listdata">
-      <div class="listitem" v-for="(item, index) in 100" :key="index">
+      <div
+        class="listitem"
+        v-for="(item, index) in 100"
+        :key="index"
+        @click="navcontent(item)"
+      >
         {{ item }}
       </div>
     </div>
@@ -25,6 +30,7 @@
 import { defineComponent, ref, reactive } from "vue";
 import { useMainStore } from "@/store/index";
 import { storeToRefs } from "pinia";
+import { useRoute, useRouter } from "vue-router";
 import MobileTab from "@/components/MobileTab/MobileTab.vue";
 export default defineComponent({
   name: "IndexName",
@@ -32,7 +38,15 @@ export default defineComponent({
     MobileTab,
   },
   setup() {
-    return {};
+    const router = useRouter();
+    const route = useRoute();
+    const navcontent = (id: number) => {
+      router.push("/paperContent");
+    };
+
+    return {
+      navcontent
+    };
   },
 });
 </script>

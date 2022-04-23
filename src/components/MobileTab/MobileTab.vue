@@ -1,13 +1,14 @@
 <template>
   <div class="container-mobiletab">
-      <div
-        class="itemx"
-        v-for="(item, index) in tab"
-        :key="index"
-        @click="btntab(item.id)"
-      >
-        {{ item.name }}
-      </div>
+    <div
+      class="itemx"
+      :class="[isactive === index ? 'selected' : 'selectedno']"
+      v-for="(item, index) in tab"
+      :key="index"
+      @click="btntab(index)"
+    >
+      {{ item.name }}
+    </div>
   </div>
 </template>
 
@@ -40,12 +41,16 @@ export default defineComponent({
       { id: "14", name: "宣传稿" },
     ];
 
-    const btntab = (id: number) => {
+    let isactive = ref<number>(0);
+
+    const btntab = (index: number) => {
       //   alert(id);
+      isactive.value = index;
     };
 
     return {
       tab,
+      isactive,
       btntab,
     };
   },
@@ -59,13 +64,26 @@ export default defineComponent({
   height: 48px;
   background: #ffffff;
   display: flex;
-  align-items: center;
+  // align-items: center;
+
+  /**滑动切取消滑动条 */
   overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   .itemx {
+    line-height: 48px;
     margin-left: 8px;
-    min-width: 75px;
+    min-width: 80px;
+  }
+  .selectedno {
+    color: #242222;
+    border-bottom: 2px solid #242222;
+  }
+  .selected {
     color: #f86767;
-    border-bottom: 1px solid #f86767;
+    border-bottom: 2px solid #f86767;
   }
 }
 </style>

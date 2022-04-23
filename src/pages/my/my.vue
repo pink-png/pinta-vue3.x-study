@@ -33,36 +33,26 @@ export default defineComponent({
   background: #f8f8f8;
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  // height: 100%;
-  height: 100vh;
   .head {
     width: 100%;
     height: 141px;
     border-radius: 0 0 20px 20px;
     background-color: #f86767;
-    position: relative;
-    top: 0;
-    left: 0;
     .avator {
       width: 50px;
       height: 50px;
-      position: absolute;
       border-radius: 50%;
-      left: 20px;
-      top: 20px;
       background-color: #ffffff;
+      margin: 20px 30px;
     }
   }
   .from {
-    position: absolute;
-    top: 84px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: -60px auto 0;
     width: 355px;
     min-height: 96px;
     background: #ffffff;
     border-radius: 4px;
+    border: 1px solid #cccccc;
     .itemfrom {
       width: 100%;
       height: 47px;
@@ -71,6 +61,7 @@ export default defineComponent({
       padding: 0 20px;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid #cccccc;
     }
   }
 }

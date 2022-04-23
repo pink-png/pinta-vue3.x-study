@@ -29,7 +29,7 @@ export default defineComponent({
     watch(
       () => route.name,
       (newPath, oldPath) => {
-        console.log("newPath", newPath);
+        // console.log("newPath", newPath);
         if (["首页", "客服问题", "我的"].includes(newPath as string)) {
           isshow.value = true
         }else{
