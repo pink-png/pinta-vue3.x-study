@@ -15,13 +15,12 @@
     <img src="~assets/img/index/banner.png" class="banner" />
 
     <div class="listbox">
-      <div
-        class="item"
-        v-for="(item, index) in Iconlist"
-        @click="navclassify(item.icon)"
-        :key="index"
-      >
-        {{ item.titlename }}
+      <div class="item" v-for="(item, index) in Iconlist" @click="navclassify(item.icon)" :key="index">
+        <div class="image" :style="{
+          'backgroundPositionX': index * -38 + 'px',
+          'backgroundPositionY': 0 + 'px'
+        }"></div>
+        <div>{{ item.titlename }}</div>
       </div>
       <div class="item" style="visibility: hidden"></div>
       <div class="item" style="visibility: hidden"></div>
@@ -45,11 +44,14 @@ export default defineComponent({
     const locationCitydel = ref<string>("杭州市");
 
     //  axios
-    //   .post('https://dev.9tax.com/newspaper/index/getParentClassify')
+    //   .get('http://127.0.0.1:3000/users/login')
     //   .then(response => (console.log('response',response)))
     //   .catch(function (error) { // 请求失败处理
     //     console.log(error);
     // });
+
+    // axios.get('https://open.onebox.so.com/dataApi?type=ip&src=onebox&tpl=0&num=1&query=ip&url=ip')
+    // .then(response => (console.log('response',response)))
 
     type iconlist = {
       icon: string;
@@ -77,7 +79,7 @@ export default defineComponent({
     };
 
     const router = useRouter();
-    const navclassify = (icon: number) => {
+    const navclassify = (icon: any) => {
       router.push({ path: "/classify", query: { id: icon } });
     };
     return {
@@ -97,6 +99,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .head {
     width: 375px;
     height: 50px;
@@ -109,14 +112,17 @@ export default defineComponent({
     .head-left {
       display: flex;
       align-items: center;
+
       img {
         width: 15px;
         height: 19px;
       }
+
       span {
         color: #ffffff;
       }
     }
+
     .head-right {
       width: 287px;
       height: 29px;
@@ -127,10 +133,12 @@ export default defineComponent({
       display: flex;
       align-items: center;
       margin-left: 13px;
+
       img {
         width: 13px;
         height: 13px;
       }
+
       input {
         margin-left: 6px;
         flex: 1;
@@ -138,6 +146,7 @@ export default defineComponent({
       }
     }
   }
+
   .banner {
     width: 100%;
     height: 210px;
@@ -152,16 +161,32 @@ export default defineComponent({
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
+
     .item {
       width: 83px;
       height: 95px;
-      text-align: center;
-      line-height: 95px;
+      // text-align: center;
+      // line-height: 95px;
       background: #ffffff;
       box-shadow: 0px 2px 4px 0px rgba(87, 87, 87, 0.15);
       border-radius: 8px;
       margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .image {
+        display: inline-block;
+        background: url(https://api.9tax.com/newspaper/pictures/20211228-180952.png) no-repeat;
+        // background: url('@/static/index/redbg.png') no-repeat;
+        background-size: 532px 38px;
+        width: 38px;
+        height: 38px;
+
+      }
     }
+
+
   }
 
   .bottomtext {

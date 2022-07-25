@@ -1,25 +1,38 @@
 <template>
   <div class="container-mobiletab">
-    <div
-      class="itemx"
-      :class="[isactive === index ? 'selected' : 'selectedno']"
-      v-for="(item, index) in tab"
-      :key="index"
-      @click="btntab(index)"
-    >
+    <div class="itemx" :class="[isactive === index ? 'selected' : 'selectedno']" v-for="(item, index) in tab"
+      :key="index" @click="btntab(index)">
       {{ item.name }}
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, reactive, watch } from "vue";
+<script  lang="ts">
+import { defineComponent, defineProps, ref, reactive, watch } from "vue";
+import { toRefs } from 'vue'
 import { useRoute, useRouter } from "vue-router";
 import { useMainStore } from "@/store/index";
 import { storeToRefs } from "pinia";
 export default defineComponent({
   name: "MobileTab",
   setup(props, context) {
+    
+    console.log(context.attrs)
+  // const { name } = toRefs(props)
+  console.log('props-0----',toRefs(props))
+    // const propsdata = defineProps<{
+    //   name: string,
+    //   data: number[]
+    // }>()
+    // console.log('propsdata', propsdata)
+    // const propsdata = defineProps({
+    //   name: {
+    //     type: String,
+    //     default: 'WO',
+    //   },
+    // })
+    // console.log('propsdata',name)
+
     type tablist = {
       id: number | string;
       name: string;
@@ -44,7 +57,6 @@ export default defineComponent({
     let isactive = ref<number>(0);
 
     const btntab = (index: number) => {
-      //   alert(id);
       isactive.value = index;
     };
 
@@ -68,6 +80,7 @@ export default defineComponent({
 
   /**滑动切取消滑动条 */
   overflow-x: scroll;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -77,10 +90,12 @@ export default defineComponent({
     margin-left: 8px;
     min-width: 80px;
   }
+
   .selectedno {
     color: #242222;
     border-bottom: 2px solid #242222;
   }
+
   .selected {
     color: #f86767;
     border-bottom: 2px solid #f86767;

@@ -9,7 +9,7 @@
     </div>
 
     <div class="tyabbb">
-      <mobile-tab />
+      <mobile-tab  name="hhhh" :data="tab" />
     </div>
 
     <!-- 列表 -->
@@ -38,6 +38,29 @@ export default defineComponent({
     MobileTab,
   },
   setup() {
+
+    type tablist = {
+      id: number | string;
+      name: string;
+    };
+    const tab: Array<tablist> = [
+      { id: "1", name: "个人证件" },
+      { id: "2", name: "发票/收据" },
+      { id: "3", name: "企业证件" },
+      { id: "4", name: "公告声明" },
+      { id: "5", name: "政府送达" },
+      { id: "6", name: "法院公告" },
+      { id: "7", name: "债券债务" },
+      { id: "8", name: "解除劳动关系公告" },
+      { id: "9", name: "环评公示" },
+      { id: "10", name: "拍卖公告" },
+      { id: "11", name: "真情告白" },
+      { id: "12", name: "登报道歉" },
+      { id: "13", name: "表扬信" },
+      { id: "14", name: "宣传稿" },
+    ];
+
+
     const router = useRouter();
     const route = useRoute();
     const navcontent = (id: number) => {
@@ -45,6 +68,7 @@ export default defineComponent({
     };
 
     return {
+      tab,
       navcontent
     };
   },
