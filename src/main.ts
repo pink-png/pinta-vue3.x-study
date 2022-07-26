@@ -9,6 +9,7 @@ import App from './App.vue'
 
 const app = createApp(App)
 const pinia = createPinia()
+console.log('start~~~~')
 
 app.use(router).use(pinia).mount('#app')
 
